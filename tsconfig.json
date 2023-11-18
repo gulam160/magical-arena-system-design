@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "build",
+    "allowJs": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipDefaultLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/index.ts"],
+  "ts-node": {
+    "esm": true
+  }
+}
