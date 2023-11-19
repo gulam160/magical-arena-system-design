@@ -70,7 +70,7 @@ class MagicalArena {
     } else {
       const declareWinner = `Player ${
         winner === this.players[0] ? "A" : "B"
-      } winner of game!`;
+      } is winner of game!`;
       console.log(declareWinner);
     }
   }
