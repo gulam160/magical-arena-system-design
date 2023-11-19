@@ -40,9 +40,46 @@ class MagicalArena {
   switchTurn(): void {
     this.currentPlayerIndex = 1 - this.currentPlayerIndex;
   }
+
+  playTurn(): void {
+    const attacker = this.players[this.currentPlayerIndex];
+    const defender = this.players[1 - this.currentPlayerIndex];
+
+    const diceRoleByAttacker = attacker.rollTheDice();
+    const diceRoleByDefender = defender.rollTheDice();
+
+    const damage =
+      diceRoleByAttacker * attacker.attack -
+      diceRoleByDefender * defender.strength;
+
+    if (damage > 0) {
+      defender.fightToDamage(damage);
+    }
+    this.switchTurn();
+  }
+
+  /* Play games untill the one player loses */
+  playGame(): void {
+    while (this.players[0].isPlayerAlive() && this.players[1].isPlayerAlive()) {
+      this.playTurn();
+    }
+
+    const winner = this.players.find((player) => player.isPlayerAlive());
+    if (!winner) {
+      console.log("It's a tie!");
+    } else {
+      const declareWinner = `Player ${
+        winner === this.players[0] ? "A" : "B"
+      } winner of game!`;
+      console.log(declareWinner);
+    }
+  }
 }
+
 const playerA = new Player(50, 5, 10);
 const playerB = new Player(100, 10, 5);
+const arena = new MagicalArena(playerA, playerB);
+arena.playGame();
 
 // Exporting classe to test in test file
 export { Player, MagicalArena };
